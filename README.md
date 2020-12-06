@@ -27,8 +27,8 @@ import WiseRouter from 'react-wise-router';
 Renders the appropriate component if and only if certain criteria you specify are met, 
 otherwise it redirects the user to another route you specify or to a global one such as `/`
 
-For instance a user tries to access a route which requires permission 'CAN_DELETE_ITEM', 
-but the user does not have that permission in their permissions, so they will be redirected to custom route you specify through the `redirectTo` prop, or if `redirectTo` is not set, the redirect will fallback to the global default `defaultRedirect` prop.
+For instance a user tries to access a route which requires permissions `['CAN_EDIT_ITEM', 'CAN_DELETE_ITEM']`, 
+but the user has only permissions `['CAN_VIEW_ITEM']`, they will be redirected to custom route you specify through the `redirectTo` prop, or if `redirectTo` is not set, the redirect will fallback to the global default `defaultRedirect` prop.
 
 #### Props
 
@@ -44,7 +44,7 @@ but the user does not have that permission in their permissions, so they will be
 | rest        | array          | null      | these are all other passed props, they are passed to react-router-dom's Route component                   |
 
 
-### Usage example with React
+### Example
 
 `Routes.js`
 
@@ -52,6 +52,8 @@ but the user does not have that permission in their permissions, so they will be
 
 import MyAccount from './components/User/MyAccount';
 import Home from './pages/Home';
+import Users from './pages/Users';
+
 
 // these are our app routes and there respective components
 const Routes = [
@@ -73,6 +75,15 @@ const Routes = [
     permissions: ['CAN_ACCESS_ACCOUNT', 'CAN_EDIT_ACCOUNT'],
     redirectTo: null
   },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users,
+    needsAuthentication: true,
+    needsAuthorisation: true,
+    permissions: ['CAN_FOLLOW_USER', 'CAN_UNFOLLOW_USER'],
+    redirectTo: null
+  },
 ]
 
 export default Routes
@@ -85,6 +96,17 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import WiseRouter from 'react-wise-router';
 import Routes from './Routes'
+
+
+/*
+
+currentUser = {
+  isAuthenticated: true,
+  permissions: ['CAN_ACCESS_ACCOUNT', 'CAN_EDIT_ACCOUNT', 'CAN_FOLLOW_USER', 'CAN_UNFOLLOW_USER', 'IS_SUPERUSER']
+}
+
+*/
+
 
 function App(props) {
 
