@@ -95,7 +95,7 @@ function App(props) {
         <Router>
           <Switch>
             {Routes.map(route => (
-              <WiseRoute exact 
+              <WiseRouter exact 
                 path={route.path} 
                 key={route.name} 
                 isAuthenticated={isAuthenticated}
