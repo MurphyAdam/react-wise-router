@@ -22,12 +22,13 @@ Or
 import WiseRouter from 'react-wise-router';
 ```
 
-## API
 ### WiseRouter component
 
-Renders the appropriate component and passes it its props if any only if certain criteria you specify are met, 
-otherwise it redirects the user to another route you specify.
+Renders the appropriate component if and only if certain criteria you specify are met, 
+otherwise it redirects the user to another route you specify or to a global one such as `/`
 
+For instance a user tries to access a route which requires permission 'CAN_DELETE_ITEM', 
+but the user does not have that permission in their permissions, so they will be redirected to custom route you specify through the `redirectTo` prop, or if `redirectTo` is not set, the redirect will fallback to the global default `defaultRedirect` prop.
 
 #### Props
 
