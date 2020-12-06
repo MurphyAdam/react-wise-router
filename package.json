@@ -1,0 +1,10 @@
+{
+  "name": "react-wise-router",
+  "version": "1.0.0",
+  "description": "Authentication, Authorisation and Permissions validation for react-router-dom",
+  "main": "index.js",
+  "repository": "https://github.com/MurphyAdam/react-wise-router",
+  "author": "Majdi Mahfoud",
+  "license": "MIT",
+  "private": false
+}
