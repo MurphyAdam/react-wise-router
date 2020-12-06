@@ -5,6 +5,13 @@
   "main": "index.js",
   "repository": "https://github.com/MurphyAdam/react-wise-router",
   "author": "Majdi Mahfoud",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-router-dom",
+    "react-router",
+    "react-wise-router",
+  ],
   "license": "MIT",
   "private": false
 }
