@@ -10,7 +10,7 @@
     "reactjs",
     "react-router-dom",
     "react-router",
-    "react-wise-router",
+    "react-wise-router"
   ],
   "license": "MIT",
   "private": false
