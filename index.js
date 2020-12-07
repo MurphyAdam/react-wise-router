@@ -24,8 +24,16 @@ function WiseRouter(props) {
       routePermissions = props.routePermissions,
       userPermissions = props.userPermissions,
       redirectTo = props.redirectTo,
-      defaultRedirect = props.defaultRedirect,
-      rest = _objectWithoutProperties(props, ["isAuthenticated", "needsAuthentication", "needsAuthorisation", "routePermissions", "userPermissions", "redirectTo", "defaultRedirect"]);
+      _props$defaultRedirec = props.defaultRedirect,
+      defaultRedirect = _props$defaultRedirec === void 0 ? '/' : _props$defaultRedirec,
+      _props$debug = props.debug,
+      debug = _props$debug === void 0 ? false : _props$debug,
+      rest = _objectWithoutProperties(props, ["isAuthenticated", "needsAuthentication", "needsAuthorisation", "routePermissions", "userPermissions", "redirectTo", "defaultRedirect", "debug"]);
+
+  if (debug) {
+    console.log('WiseRouter props:\n');
+    console.log(props);
+  }
 
   var hasAllPermissions = function hasAllPermissions() {
     return routePermissions.every(function (p) {
@@ -62,9 +70,10 @@ WiseRouter.propTypes = {
   needsAuthentication: _propTypes.default.bool,
   needsAuthorisation: _propTypes.default.bool,
   isAuthenticated: _propTypes.default.bool,
-  routePermissions: _propTypes.default.array,
-  userPermissions: _propTypes.default.array,
+  userPermissions: _propTypes.default.arrayOf(_propTypes.default.string).isRequired,
+  routePermissions: _propTypes.default.arrayOf(_propTypes.default.string).isRequired,
   redirectTo: _propTypes.default.string,
   defaultRedirect: _propTypes.default.string,
+  debug: _propTypes.default.bool,
   rest: _propTypes.default.array
 };
