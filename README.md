@@ -40,7 +40,8 @@ but the user has only permissions `['CAN_VIEW_ITEM']`, they will be redirected t
 | routePermissions        | array[string]          | null      | array of permissions required to access this component                     |
 | userPermissions        | array[string]          | null      | array of permissions the user has                     |
 | redirectTo        | string          | null      | where to redirect the user to if they don't have much permissions or are unauthenticated, this is per component                     |
-| defaultRedirect        | string          | null      | where to redirect the user to if they don't have much permissions or are unauthenticated, this is global and used when a component doesn't specify a redirectTo                     |
+| defaultRedirect        | string          | `/`      | where to redirect the user to if they don't have much permissions or are unauthenticated, this is global and used when a component doesn't specify a redirectTo                     |
+| debug       | bool           | false     | if you set `debug` prop to `true`, every route you head on or you are redirected to will be consoled to your log.
 | rest        | array          | null      | these are all other passed props, they are passed to react-router-dom's Route component                   |
 
 
@@ -135,6 +136,56 @@ function App(props) {
       </div>
   );
 
+}
+
+```
+
+### Debug
+
+if you set `debug` prop to `true`, every route you head on or you are redirected to will be consoled to your console.
+
+```json
+
+{
+  "exact": true,
+  "path": "/users",
+  "isAuthenticated": true,
+  "needsAuthentication": true,
+  "needsAuthorisation": true,
+  "routePermissions": [
+    "CAN_VIEW_USERS"
+  ],
+  "userPermissions": [
+    "CAN_VIEW_USERS",
+    "FOLLOW_USERS",
+    "UNFOLLOW_USERS",
+    "CAN_CREATE_CORPUS_TEXT",
+    "CAN_CREATE_POSTS",
+    "CAN_EDIT_POSTS",
+    "CAN_DELETE_POSTS",
+    "CAN_CREATE_PAGES",
+    "CAN_EDIT_PAGES",
+    "CAN_DELETE_PAGES"
+  ],
+  "redirectTo": null,
+  "defaultRedirect": "/",
+  "component": {
+    "compare": null,
+    "displayName": "Connect(Users)"
+  },
+  "debug": true,
+  "location": {
+    "pathname": "/users",
+    "search": "",
+    "hash": "",
+    "key": "j757ew"
+  },
+  "computedMatch": {
+    "path": "/users",
+    "url": "/users",
+    "isExact": true,
+    "params": {}
+  }
 }
 
 ```
