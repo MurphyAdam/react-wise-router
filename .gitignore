@@ -5,6 +5,9 @@
 # main jsx component
 WiseRouter.jsx
 
+# experimental folder
+/exp
+
 #logs
 
 npm-debug.log*
