@@ -34,6 +34,7 @@ but the user has only permissions `['CAN_VIEW_ITEM']`, they will be redirected t
 
 | Name         | Type            | Default   | Description                                                                                                                                                               |
 |------------  |---------------  |---------  |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------  |
+| exact        | bool            | true      | react-router-dom prop
 | needsAuthentication        | bool          | null      | user needs to be authenticated to access the component                      |
 | needsAuthorisation        | bool          | null      | user needs to be authorized to access the component                     |
 | isAuthenticated        | bool          | null      | whether or not the user is authenticated                     |
