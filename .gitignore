@@ -4,6 +4,7 @@
 
 # main jsx component
 WiseRouter.jsx
+Routes.js
 
 # experimental folder
 /exp
