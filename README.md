@@ -1,5 +1,5 @@
 [![Version](https://img.shields.io/npm/v/react-wise-router.svg)](https://www.npmjs.com/package/react-wise-router) 
-[![Downloads](https://img.shields.io/npm/dt/js-img2base64.svg)](https://www.npmjs.com/package/react-wise-router)
+[![Downloads](https://img.shields.io/npm/dt/react-wise-router.svg)](https://www.npmjs.com/package/react-wise-router)
 
 [![Majdi's github stats](https://github-readme-stats.vercel.app/api?username=MurphyAdam&count_private=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
 
