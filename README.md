@@ -5,6 +5,7 @@
 # react-wise-router
 
 Authentication, Authorisation and Permissions validation wrapper component for react-router-dom.
+Check below for new version updates.
 
 ## Install
 ```
