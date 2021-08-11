@@ -1,16 +1,11 @@
+node_modules/
+*.log
+*.tgz
+*.lock
 
-# dependencies
-**/node_modules
-
-# main jsx component
-WiseRouter.jsx
-Routes.js
-
-# experimental folder
-/exp
-
-#logs
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+dist/
+tests/
+tsconfig.json
+tslint.json
+typings.json
+typings
