@@ -11,6 +11,7 @@ interface WiseRouterProps {
   needsAuthentication: boolean,
   needsAuthorisation: boolean,
   isAuthenticated: boolean,
+  isAuthorised: boolean,
   userPermissions: string[],
   routePermissions: string[],
   redirectTo: RedirectProps['to'],
@@ -23,24 +24,19 @@ interface WiseRouterProps {
 
 const WiseRouter: React.FC<WiseRouterProps> = (props) => {
 
-  const { component, isAuthenticated, needsAuthentication,
+  const { component, isAuthenticated, isAuthorised, needsAuthentication,
     needsAuthorisation, routePermissions,
     userPermissions, redirectTo,
-    defaultRedirect = '/', fallback = null,
+    defaultRedirect = '/', fallback,
     debug = false, passRouteProps = false, ...rest } = props;
 
   let routeProps: object = {};
-  const passRoutePropsBool: boolean = !!passRouteProps && Array.isArray(passRouteProps);
+  const passRoutePropsBool: boolean = Array.isArray(passRouteProps);
 
   let Component: React.ComponentType<any> = component;
   if (!React.isValidElement(<Component />)) {
     throw new Error('Passed component is not a valid React component.')
   }
-
-  /*
-  we could implement fallback component and its props in two ways:
-  the one just below, or with `return React.createElement(fallback.component, fallback.props)`
-  */
 
   let FallbackComponent: null | React.ComponentType<any> = null;
   let fallbackProps: object = {};
@@ -49,13 +45,6 @@ const WiseRouter: React.FC<WiseRouterProps> = (props) => {
     FallbackComponent = component;
     fallbackProps = props;
   }
-
-  /*
-  can't we do something like this instead of the above?
-  if(!!fallback) {
-    const { component: FallbackComponent, props: fallbackProps = {} } = fallback;
-  }
-  */
 
   if (debug) {
     console.log('WiseRouter props:\n');
@@ -83,10 +72,10 @@ const WiseRouter: React.FC<WiseRouterProps> = (props) => {
         return <Route render={() => <Component {...routeProps} />} {...rest} />
       }
       else if (needsAuthorisation) {
-        if (hasAllPermissions()) {
+        if (isAuthorised && hasAllPermissions()) {
           return <Route render={() => <Component {...routeProps} />} {...rest} />
         }
-        else if (!!passRoutePropsBool && !redirectTo) {
+        else if (passRoutePropsBool && !redirectTo) {
           // user wants the component to only be accessed if authenticated + 
           // authorised users
           // but they don't wanna redirect user to any route, but rather 
@@ -108,7 +97,7 @@ const WiseRouter: React.FC<WiseRouterProps> = (props) => {
         }
       }
     }
-    if (!!passRoutePropsBool && !redirectTo) {
+    if (passRoutePropsBool && !redirectTo) {
       // user wants the component to only be accessed if authenticated, 
       // but they don't wanna redirect user to any route, but rather 
       // let the component handle what needs to be done itself.
