@@ -3,7 +3,8 @@
 # react-wise-router
 
 Authentication, Authorisation and Permissions validation wrapper component for react-router-dom.
-Check below for new version updates. Rewritten in TypeScript.
+Check below for new version updates. 
+Rewritten in TypeScript.
 
 ## Install
 ```
@@ -68,7 +69,7 @@ import Users from './pages/Users';
 import Unauthorized from './components/Errors/Unauthorized';
 
 
-// these are our app routes and there respective components
+// these are our app routes and their respective components
 const Routes = [
   {
     path: '/',
