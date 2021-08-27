@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, RedirectProps } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 interface Fallback {
   component: React.ComponentType<any>,
@@ -7,24 +7,24 @@ interface Fallback {
 }
 
 interface WiseRouterProps {
-  component: React.ComponentType<any>,
-  needsAuthentication: boolean,
-  needsAuthorisation: boolean,
-  isAuthenticated: boolean,
-  isAuthorised: boolean,
-  userPermissions: string[],
-  routePermissions: string[],
-  redirectTo: RedirectProps['to'],
-  defaultRedirect: RedirectProps['to'],
-  fallback: null | Fallback,
-  debug: boolean,
-  passRouteProps: boolean | string[],
-  rest: [],
+  component: React.ComponentType<any> | null | undefined,
+  needsAuthentication: boolean | undefined,
+  needsAuthorisation: boolean | undefined,
+  isAuthenticated: boolean | undefined,
+  isAuthorised: boolean | undefined,
+  userPermissions: string[] | undefined,
+  routePermissions: string[] | undefined,
+  redirectTo: string | null | undefined,
+  defaultRedirect: string | '/' | undefined,
+  fallback: null | Fallback | undefined,
+  debug: boolean | undefined,
+  passRouteProps: boolean | string[] | undefined,
+  rest: [] | null | undefined;
 }
 
 const WiseRouter: React.FC<WiseRouterProps> = (props) => {
 
-  const { component, isAuthenticated, isAuthorised, needsAuthentication,
+  const { component: Component = null, isAuthenticated, isAuthorised, needsAuthentication,
     needsAuthorisation, routePermissions,
     userPermissions, redirectTo,
     defaultRedirect = '/', fallback,
@@ -33,12 +33,16 @@ const WiseRouter: React.FC<WiseRouterProps> = (props) => {
   let routeProps: object = {};
   const passRoutePropsBool: boolean = Array.isArray(passRouteProps);
 
-  let Component: React.ComponentType<any> = component;
-  if (!React.isValidElement(<Component />)) {
-    throw new Error('Passed component is not a valid React component.')
+  if (Component) {
+    if (!React.isValidElement(<Component />)) {
+      throw new Error('Passed component is not a valid React component.')
+    }
+  }
+  else {
+    return null
   }
 
-  let FallbackComponent: null | React.ComponentType<any> = null;
+  let FallbackComponent: null | React.ComponentType<any> | undefined = null;
   let fallbackProps: object = {};
   if (!!fallback) {
     const { component, props } = fallback;
@@ -60,6 +64,7 @@ const WiseRouter: React.FC<WiseRouterProps> = (props) => {
   }
 
   const hasAllPermissions = () => {
+    if (!routePermissions || !userPermissions) return;
     return routePermissions.every((p: string) => userPermissions.includes(p));
   }
 
@@ -93,7 +98,9 @@ const WiseRouter: React.FC<WiseRouterProps> = (props) => {
           return <FallbackComponent {...fallbackProps} />
         }
         else {
-          return <Redirect to={!!redirectTo ? redirectTo : defaultRedirect} />
+          return <Redirect to={!!redirectTo ?
+            { pathname: redirectTo } :
+            { pathname: defaultRedirect }} />
         }
       }
     }
